@@ -130,6 +130,7 @@ export const getPortfolioItems = cache(async (): Promise<PortfolioItem[]> => {
 });
 
 export const getAllPortfolioSlugs = cache(async (): Promise<string[]> => {
+  if (!hasPublicEnv()) return fallbackPortfolio.map((p) => p.slug);
   const { data } = await db()
     .from("portfolio_items")
     .select("slug")
