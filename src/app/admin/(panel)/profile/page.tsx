@@ -3,6 +3,7 @@ import { saveProfileAction } from "@/lib/actions/settings";
 import { saveSocialLinkAction } from "@/lib/actions/collections";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { MediaPicker } from "@/components/admin/MediaPicker";
+import { CvUploader } from "@/components/admin/CvUploader";
 import {
   AdminPageHeader,
   AdminCard,
@@ -90,8 +91,11 @@ export default async function ProfilePage() {
             <Field label="Hero background URL">
               <MediaPicker name="hero_bg_url" value={profile.hero_bg_url} folders={["hero", "media"]} />
             </Field>
-            <Field label="CV file URL" hint="Link to your PDF/resume file.">
-              <TextInput name="cv_url" defaultValue={profile.cv_url} placeholder="https://…" />
+            <Field
+              label="CV file"
+              hint="Upload a PDF or DOC/​DOCX file. It shows as a download button on the site."
+            >
+              <CvUploader name="cv_url" value={profile.cv_url} />
             </Field>
             <SubmitButton>Save links</SubmitButton>
           </AdminForm>

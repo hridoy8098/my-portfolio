@@ -12,6 +12,17 @@ create policy "public read images"
   on storage.objects for select
   using (bucket_id = 'images');
 
+-- Storage bucket for resume / CV files (pdf, doc, docx)
+insert into storage.buckets (id, name, public,
+  file_size_limit, allowed_mime_types)
+values ('cv', 'cv', true, 10485760,
+  array['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document']::text[])
+on conflict (id) do nothing;
+
+create policy "public read cv"
+  on storage.objects for select
+  using (bucket_id = 'cv');
+
 -- ------------------------------------------------------------
 -- profile (single row, id = 1)
 -- ------------------------------------------------------------
