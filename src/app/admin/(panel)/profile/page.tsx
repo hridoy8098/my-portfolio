@@ -28,7 +28,7 @@ export default async function ProfilePage() {
       />
 
       <div className="grid gap-6 xl:grid-cols-2">
-        <AdminCard title="Basic info">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 ring-1 ring-indigo-500/20"><i className="bi bi-person-badge-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Basic info</h2></div>}>
           <AdminForm action={saveProfileAction}>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Name">
@@ -67,7 +67,7 @@ export default async function ProfilePage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Social & links">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 ring-1 ring-sky-500/20"><i className="bi bi-image-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Social &amp; links</h2></div>}>
           <AdminForm action={saveProfileAction}>
             <div className="grid grid-cols-2 gap-4">
               <Field label="GitHub handle">
@@ -101,7 +101,7 @@ export default async function ProfilePage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="About" description="Content shown in the About section.">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20"><i className="bi bi-info-circle-fill text-[13px]" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">About</h2><p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">Content shown in the About section.</p></div></div>}>
           <AdminForm action={saveProfileAction}>
             <Field label="About headline">
               <TextInput name="about_headline" defaultValue={profile.about_headline} />
@@ -119,7 +119,7 @@ export default async function ProfilePage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Resume summary">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20"><i className="bi bi-file-earmark-text-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Resume summary</h2></div>}>
           <AdminForm action={saveProfileAction}>
             <Field label="Summary">
               <TextArea name="resume_summary" rows={4} defaultValue={profile.resume_summary} />
@@ -134,8 +134,7 @@ export default async function ProfilePage() {
 
       <div className="mt-6">
         <AdminCard
-          title="Social links"
-          description="Shown in the sidebar, nav and contact section."
+          title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20"><i className="bi bi-share-fill text-[13px]" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Social links</h2><p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">Shown in the sidebar, nav and contact section.</p></div></div>}
         >
           <div className="space-y-6">
             {socials.map((s) => (
@@ -153,8 +152,8 @@ export default async function ProfilePage() {
                   <TextInput name="url" defaultValue={s.url} />
                 </Field>
                 <div className="flex items-center justify-between">
-                  <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                    <input type="checkbox" name="is_published" defaultChecked={s.is_published} />
+                  <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                    <input type="checkbox" name="is_published" defaultChecked={s.is_published} className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                     Published
                   </label>
                   <div className="flex gap-2">
@@ -165,7 +164,8 @@ export default async function ProfilePage() {
             ))}
 
             <AdminForm action={saveSocialLinkAction} successMessage="Added.">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+              <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--admin-text-soft)]">
+                <i className="bi bi-plus-circle" />
                 Add new social link
               </p>
               <div className="grid grid-cols-2 gap-4">
@@ -180,8 +180,8 @@ export default async function ProfilePage() {
                 <TextInput name="url" placeholder="https://…" />
               </Field>
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                  <input type="checkbox" name="is_published" defaultChecked />
+                <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                  <input type="checkbox" name="is_published" defaultChecked className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                   Published
                 </label>
                 <SubmitButton>Add</SubmitButton>

@@ -36,22 +36,28 @@ export function AdminCard({
   children,
   className,
 }: {
-  title?: string;
-  description?: string;
+  title?: ReactNode;
+  description?: ReactNode;
   actions?: ReactNode;
   children: ReactNode;
   className?: string;
 }) {
+  const hasHeader = title || actions;
+  // Backward compat: if title is a string, wrap in h2
+  const titleNode =
+    typeof title === "string" ? (
+      <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">
+        {title}
+      </h2>
+    ) : (
+      title
+    );
   return (
     <div className={`admin-card ${className ?? ""}`}>
-      {(title || actions) && (
+      {hasHeader && (
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--admin-border)] px-5 py-4">
           <div className="min-w-0">
-            {title && (
-              <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">
-                {title}
-              </h2>
-            )}
+            {titleNode}
             {description && (
               <p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">
                 {description}

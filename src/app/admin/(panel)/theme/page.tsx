@@ -38,7 +38,16 @@ export default async function ThemePage() {
 
       <AdminForm action={saveThemeAction}>
         <div className="grid gap-6 lg:grid-cols-2">
-          <AdminCard title="Colors">
+          <AdminCard
+            title={
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20">
+                  <i className="bi bi-palette-fill text-[13px]" />
+                </span>
+                <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Colors</h2>
+              </div>
+            }
+          >
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {COLORS.map((c) => (
                 <Field key={c.key} label={c.label} htmlFor={String(c.key)}>
@@ -48,7 +57,7 @@ export default async function ThemePage() {
                       name={String(c.key)}
                       type="color"
                       defaultValue={String(t[c.key] ?? "#000000")}
-                      className="h-9 min-w-10 cursor-pointer rounded border border-gray-300 bg-white p-0.5"
+                      className="h-10 min-w-12 cursor-pointer rounded-lg border border-[var(--admin-border)] bg-[var(--admin-surface)] p-1"
                     />
                     <TextInput
                       name={`${String(c.key)}_hex`}
@@ -70,15 +79,24 @@ export default async function ThemePage() {
                 min="0"
                 max="100"
                 defaultValue={t.hero_overlay_opacity}
-                className="w-full accent-accent"
+                className="w-full accent-[var(--admin-accent)]"
               />
             </Field>
           </AdminCard>
 
           <div className="space-y-6">
             <AdminCard
-              title="Font preset"
-              description="Pick a combination. The three font fields below update automatically."
+              title={
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20">
+                    <i className="bi bi-fonts text-[13px]" />
+                  </span>
+                  <div>
+                    <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Font preset</h2>
+                    <p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">Pick a combination. The three font fields below update automatically.</p>
+                  </div>
+                </div>
+              }
             >
               <Field label="Font preset">
                 <FontPresetPicker defaultId={preset.id} />
@@ -86,8 +104,17 @@ export default async function ThemePage() {
             </AdminCard>
 
             <AdminCard
-              title="Font fields"
-              description="Stored with the theme and applied as CSS variables."
+              title={
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 ring-1 ring-indigo-500/20">
+                    <i className="bi bi-type text-[13px]" />
+                  </span>
+                  <div>
+                    <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Font fields</h2>
+                    <p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">Stored with the theme and applied as CSS variables.</p>
+                  </div>
+                </div>
+              }
             >
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <Field label="Heading font">
@@ -104,7 +131,7 @@ export default async function ThemePage() {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="mt-6 flex justify-end">
           <SubmitButton>Save theme</SubmitButton>
         </div>
       </AdminForm>

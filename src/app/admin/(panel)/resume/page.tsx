@@ -13,19 +13,20 @@ import {
 
 function EducationSection({ items }: { items: Education[] }) {
   return (
-    <AdminCard title="Education">
-      <div className="space-y-5">
+    <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 ring-1 ring-indigo-500/20"><i className="bi bi-mortarboard-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Education</h2></div>}>
+      <div className="space-y-4">
         {items.map((e) => (
-          <div key={e.id} className="rounded-md border border-gray-200 p-4">
-            <div className="flex justify-end">
+          <div key={e.id} className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface-2)] p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="flex items-center gap-2 text-[12px] font-medium text-[var(--admin-text-soft)]"><i className="bi bi-mortarboard" />{e.degree || 'Untitled'}</span>
               <AdminForm action={deleteRowAction} successMessage="Deleted.">
                 <input type="hidden" name="_table" value="education" />
                 <input type="hidden" name="_id" value={e.id} />
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1 rounded text-xs font-medium text-red-600 transition hover:text-red-700"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[12px] font-medium text-rose-600 transition hover:bg-rose-500/10 dark:text-rose-400"
                 >
-                  <i className="bi bi-trash" /> Delete
+                  <i className="bi bi-trash text-[11px]" /> Delete
                 </button>
               </AdminForm>
             </div>
@@ -43,8 +44,8 @@ function EducationSection({ items }: { items: Education[] }) {
                 <TextArea name="description" rows={3} defaultValue={e.description} />
               </Field>
               <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                  <input type="checkbox" name="is_published" defaultChecked={e.is_published} />
+                <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                  <input type="checkbox" name="is_published" defaultChecked={e.is_published} className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                   Published
                 </label>
                 <SubmitButton>Save</SubmitButton>
@@ -53,8 +54,9 @@ function EducationSection({ items }: { items: Education[] }) {
           </div>
         ))}
 
-        <div className="rounded-md border border-dashed border-gray-300 p-4">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-400">
+        <div className="rounded-xl border border-dashed border-[var(--admin-border)] p-4">
+          <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--admin-text-soft)]">
+            <i className="bi bi-plus-circle" />
             Add education
           </p>
           <AdminForm action={saveEducationAction} successMessage="Added.">
@@ -70,8 +72,8 @@ function EducationSection({ items }: { items: Education[] }) {
               <TextArea name="description" rows={3} />
             </Field>
             <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                <input type="checkbox" name="is_published" defaultChecked />
+              <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                <input type="checkbox" name="is_published" defaultChecked className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                 Published
               </label>
               <SubmitButton>Add</SubmitButton>
@@ -85,19 +87,20 @@ function EducationSection({ items }: { items: Education[] }) {
 
 function ExperienceSection({ items }: { items: Experience[] }) {
   return (
-    <AdminCard title="Experience">
-      <div className="space-y-5">
+    <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20"><i className="bi bi-briefcase-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Experience</h2></div>}>
+      <div className="space-y-4">
         {items.map((x) => (
-          <div key={x.id} className="rounded-md border border-gray-200 p-4">
-            <div className="flex justify-end">
+          <div key={x.id} className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface-2)] p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="flex items-center gap-2 text-[12px] font-medium text-[var(--admin-text-soft)]"><i className="bi bi-briefcase" />{x.role || 'Untitled'} · {x.organization || '—'}</span>
               <AdminForm action={deleteRowAction} successMessage="Deleted.">
                 <input type="hidden" name="_table" value="experience" />
                 <input type="hidden" name="_id" value={x.id} />
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1 rounded text-xs font-medium text-red-600 transition hover:text-red-700"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[12px] font-medium text-rose-600 transition hover:bg-rose-500/10 dark:text-rose-400"
                 >
-                  <i className="bi bi-trash" /> Delete
+                  <i className="bi bi-trash text-[11px]" /> Delete
                 </button>
               </AdminForm>
             </div>
@@ -129,8 +132,8 @@ function ExperienceSection({ items }: { items: Experience[] }) {
                 />
               </Field>
               <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                  <input type="checkbox" name="is_published" defaultChecked={x.is_published} />
+                <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                  <input type="checkbox" name="is_published" defaultChecked={x.is_published} className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                   Published
                 </label>
                 <SubmitButton>Save</SubmitButton>
@@ -139,8 +142,9 @@ function ExperienceSection({ items }: { items: Experience[] }) {
           </div>
         ))}
 
-        <div className="rounded-md border border-dashed border-gray-300 p-4">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-400">
+        <div className="rounded-xl border border-dashed border-[var(--admin-border)] p-4">
+          <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--admin-text-soft)]">
+            <i className="bi bi-plus-circle" />
             Add experience
           </p>
           <AdminForm action={saveExperienceAction} successMessage="Added.">
@@ -162,8 +166,8 @@ function ExperienceSection({ items }: { items: Experience[] }) {
               <TextArea name="responsibilities" rows={3} />
             </Field>
             <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                <input type="checkbox" name="is_published" defaultChecked />
+              <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                <input type="checkbox" name="is_published" defaultChecked className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                 Published
               </label>
               <SubmitButton>Add</SubmitButton>

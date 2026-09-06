@@ -19,6 +19,49 @@ import {
   SubmitButton,
 } from "@/components/admin/ui";
 
+function SectionIcon({ name }: { name: string }) {
+  const icons: Record<string, string> = {
+    meta: "bi-search",
+    hero: "bi-house-door-fill",
+    subtitles: "bi-textarea-t",
+    footer: "bi-layout-text-window-reverse",
+    resume: "bi-file-earmark-text-fill",
+    service: "bi-briefcase-fill",
+    contact: "bi-envelope-fill",
+  };
+  return (
+    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 ring-1 ring-indigo-500/20">
+      <i className={`bi ${icons[name] ?? "bi-gear"}`} />
+    </span>
+  );
+}
+
+function CardHeader({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <SectionIcon name={icon} />
+      <div>
+        <h2 className="text-[15px] font-semibold text-[var(--admin-text)]">
+          {title}
+        </h2>
+        {description && (
+          <p className="mt-0.5 text-[13px] text-[var(--admin-text-muted)]">
+            {description}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default async function SettingsPage() {
   const s = await getSettings();
   const lines = (arr: string[] | undefined) => arr?.join("\n") ?? "";
@@ -31,7 +74,9 @@ export default async function SettingsPage() {
       />
 
       <div className="grid gap-6 xl:grid-cols-2">
-        <AdminCard title="Meta" description="SEO and browser tab settings.">
+        <AdminCard
+          title={<CardHeader icon="meta" title="Meta" description="SEO and browser tab settings." />}
+        >
           <AdminForm action={saveMetaSettings}>
             <Field label="Site title" htmlFor="site_title">
               <TextInput id="site_title" name="site_title" defaultValue={s.meta.site_title} />
@@ -69,7 +114,9 @@ export default async function SettingsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Hero" description="Hero section button labels and links.">
+        <AdminCard
+          title={<CardHeader icon="hero" title="Hero" description="Hero section button labels and links." />}
+        >
           <AdminForm action={saveHeroSettings}>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Hello prefix">
@@ -105,7 +152,15 @@ export default async function SettingsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Section subtitles" description="One-line subtitle under each section title.">
+        <AdminCard
+          title={
+            <CardHeader
+              icon="subtitles"
+              title="Section subtitles"
+              description="One-line subtitle under each section title."
+            />
+          }
+        >
           <AdminForm action={saveSectionSubtitles}>
             {(["about", "skills", "resume", "portfolio", "services", "contact"] as const).map(
               (k) => (
@@ -122,13 +177,18 @@ export default async function SettingsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Footer">
+        <AdminCard title={<CardHeader icon="footer" title="Footer" />}>
           <AdminForm action={saveFooterSettings}>
             <Field label="Copyright text">
               <TextInput name="copyright_text" defaultValue={s.footer.copyright_text} />
             </Field>
-            <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-              <input type="checkbox" name="show_credit" defaultChecked={s.footer.show_credit} />
+            <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+              <input
+                type="checkbox"
+                name="show_credit"
+                defaultChecked={s.footer.show_credit}
+                className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]"
+              />
               Show credit line
             </label>
             <Field label="Credit HTML (if shown)">
@@ -138,7 +198,7 @@ export default async function SettingsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Resume labels">
+        <AdminCard title={<CardHeader icon="resume" title="Resume labels" />}>
           <AdminForm action={saveResumeLabels}>
             <Field label="Summary heading">
               <TextInput name="summary_heading" defaultValue={s.resume_labels.summary_heading} />
@@ -154,8 +214,13 @@ export default async function SettingsPage() {
         </AdminCard>
 
         <AdminCard
-          title="Service details page"
-          description="Content for the single service-details page (no per-service pages)."
+          title={
+            <CardHeader
+              icon="service"
+              title="Service details page"
+              description="Content for the single service-details page (no per-service pages)."
+            />
+          }
         >
           <AdminForm action={saveServiceDetailsSettings}>
             <div className="grid grid-cols-2 gap-4">
@@ -195,7 +260,15 @@ export default async function SettingsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Contact form" description="Labels, placeholders and validation messages.">
+        <AdminCard
+          title={
+            <CardHeader
+              icon="contact"
+              title="Contact form"
+              description="Labels, placeholders and validation messages."
+            />
+          }
+        >
           <AdminForm action={saveContactSettings}>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Name label">
@@ -243,7 +316,7 @@ export default async function SettingsPage() {
             <Field label="Error message">
               <TextArea name="error_message" rows={2} defaultValue={s.contact.error_message} />
             </Field>
-            <AdminCard title="Per-field required errors">
+            <AdminCard title={<CardHeader icon="contact" title="Per-field required errors" />}>
               <div className="grid grid-cols-1 gap-4">
                 {(["name", "email", "subject", "message"] as const).map((k) => (
                   <Field key={k} label={`${k} required error`}>

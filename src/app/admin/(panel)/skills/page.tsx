@@ -29,9 +29,9 @@ function CategoryCard({
           <input type="hidden" name="_id" value={category.id} />
           <button
             type="submit"
-            className="inline-flex items-center gap-1 rounded text-xs font-medium text-red-600 transition hover:text-red-700"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[12px] font-medium text-rose-600 transition hover:bg-rose-500/10 dark:text-rose-400"
           >
-            <i className="bi bi-trash" /> Delete group
+            <i className="bi bi-trash text-[11px]" /> Delete group
           </button>
         </AdminForm>
       }
@@ -48,32 +48,37 @@ function CategoryCard({
             </Field>
           </div>
           <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-              <input type="checkbox" name="is_published" defaultChecked={category.is_published} />
+            <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+              <input type="checkbox" name="is_published" defaultChecked={category.is_published} className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
               Published
             </label>
             <SubmitButton>Save group</SubmitButton>
           </div>
         </AdminForm>
 
-        <div className="border-t border-gray-100 pt-4">
-          <p className="mb-3 text-[13px] font-semibold text-gray-700">Skills in this group</p>
+        <div className="border-t border-[var(--admin-border)] pt-4">
+          <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--admin-text-soft)]">
+            <i className="bi bi-list-ul" />
+            Skills in this group
+          </p>
           <ul className="space-y-2">
             {category.skills.map((skill) => (
-              <li key={skill.id} className="rounded-md border border-gray-100 bg-gray-50 p-3">
+              <li key={skill.id} className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface-2)] p-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2">
-                    {skill.icon && <i className={`bi ${skill.icon}`} />}
-                    <span className="text-sm font-medium text-gray-900">{skill.name}</span>
+                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600">
+                      <i className={`bi ${skill.icon || 'bi-dot'} text-[12px]`} />
+                    </span>
+                    <span className="text-[14px] font-semibold text-[var(--admin-text)]">{skill.name}</span>
                   </div>
                   <AdminForm action={deleteRowAction} successMessage="Deleted.">
                     <input type="hidden" name="_table" value="skills" />
                     <input type="hidden" name="_id" value={skill.id} />
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-1 rounded text-xs font-medium text-red-600 transition hover:text-red-700"
+                      className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[12px] font-medium text-rose-600 transition hover:bg-rose-500/10 dark:text-rose-400"
                     >
-                      <i className="bi bi-trash" /> Delete
+                      <i className="bi bi-trash text-[11px]" /> Delete
                     </button>
                   </AdminForm>
                 </div>
@@ -89,8 +94,8 @@ function CategoryCard({
                     </Field>
                   </div>
                   <div className="mt-2 flex items-center justify-between">
-                    <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                      <input type="checkbox" name="is_published" defaultChecked={skill.is_published} />
+                    <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                      <input type="checkbox" name="is_published" defaultChecked={skill.is_published} className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                       Published
                     </label>
                     <SubmitButton>Update</SubmitButton>
@@ -99,7 +104,7 @@ function CategoryCard({
               </li>
             ))}
             {category.skills.length === 0 && (
-              <li className="text-[13px] text-gray-400">No skills in this group yet.</li>
+              <li className="py-4 text-center text-[13px] text-[var(--admin-text-soft)]">No skills in this group yet.</li>
             )}
           </ul>
         </div>
@@ -119,7 +124,7 @@ export default async function SkillsPage() {
       />
 
       <div className="mb-8 grid gap-6 lg:grid-cols-2">
-        <AdminCard title="Add new skill">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20"><i className="bi bi-plus-circle-fill" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Add new skill</h2></div></div>}>
           <AdminForm action={saveSkillAction} successMessage="Added.">
             <div className="grid grid-cols-2 gap-4">
               <Field label="Name">
@@ -139,8 +144,8 @@ export default async function SkillsPage() {
               </SelectInput>
             </Field>
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                <input type="checkbox" name="is_published" defaultChecked />
+              <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                <input type="checkbox" name="is_published" defaultChecked className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                 Published
               </label>
               <SubmitButton>Add</SubmitButton>
@@ -148,7 +153,7 @@ export default async function SkillsPage() {
           </AdminForm>
         </AdminCard>
 
-        <AdminCard title="Add new group">
+        <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20"><i className="bi bi-folder-plus-fill" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Add new group</h2></div></div>}>
           <AdminForm action={saveSkillCategoryAction} successMessage="Added.">
             <div className="grid grid-cols-2 gap-4">
               <Field label="Group label">
@@ -159,8 +164,8 @@ export default async function SkillsPage() {
               </Field>
             </div>
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 text-[13px] font-medium text-gray-700">
-                <input type="checkbox" name="is_published" defaultChecked />
+              <label className="flex items-center gap-2 text-[13px] font-medium text-[var(--admin-text)]">
+                <input type="checkbox" name="is_published" defaultChecked className="h-4 w-4 rounded border-[var(--admin-border)] text-[var(--admin-accent)] focus:ring-[var(--admin-accent)]" />
                 Published
               </label>
               <SubmitButton>Add</SubmitButton>
