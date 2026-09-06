@@ -80,7 +80,7 @@ function CategoryCard({
                 <AdminForm action={saveSkillAction} successMessage="Saved.">
                   <input type="hidden" name="_id" defaultValue={skill.id} />
                   <input type="hidden" name="category_id" value={category.id} />
-                  <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-2">
+                  <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
                     <Field label="Name">
                       <TextInput name="name" defaultValue={skill.name} placeholder="Skill name" />
                     </Field>

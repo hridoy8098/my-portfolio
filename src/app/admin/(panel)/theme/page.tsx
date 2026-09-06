@@ -89,7 +89,7 @@ export default async function ThemePage() {
               title="Font fields"
               description="Stored with the theme and applied as CSS variables."
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <Field label="Heading font">
                   <TextInput id="font_heading" name="font_heading" defaultValue={t.font_heading} readOnly />
                 </Field>
