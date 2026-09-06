@@ -1,4 +1,4 @@
-import { getSkillCategories } from "@/lib/supabase/queries";
+import { getAdminSkillCategories } from "@/lib/supabase/queries";
 import {
   saveSkillAction,
   saveSkillCategoryAction,
@@ -39,7 +39,7 @@ function CategoryCard({
       <div className="space-y-4">
         <AdminForm action={saveSkillCategoryAction} successMessage="Saved.">
           <input type="hidden" name="_id" defaultValue={category.id} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field label="Group label">
               <TextInput name="label" defaultValue={category.label} />
             </Field>
@@ -64,7 +64,7 @@ function CategoryCard({
           <ul className="space-y-2">
             {category.skills.map((skill) => (
               <li key={skill.id} className="rounded-xl border border-[var(--admin-border)] bg-[var(--admin-surface-2)] p-3">
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600">
                       <i className={`bi ${skill.icon || 'bi-dot'} text-[12px]`} />
@@ -114,7 +114,7 @@ function CategoryCard({
 }
 
 export default async function SkillsPage() {
-  const categories = await getSkillCategories();
+  const categories = await getAdminSkillCategories();
 
   return (
     <>
@@ -126,7 +126,7 @@ export default async function SkillsPage() {
       <div className="mb-8 grid gap-6 lg:grid-cols-2">
         <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20"><i className="bi bi-plus-circle-fill" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Add new skill</h2></div></div>}>
           <AdminForm action={saveSkillAction} successMessage="Added.">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Name">
                 <TextInput name="name" placeholder="Laravel" />
               </Field>
@@ -155,7 +155,7 @@ export default async function SkillsPage() {
 
         <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20"><i className="bi bi-folder-plus-fill" /></span><div><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Add new group</h2></div></div>}>
           <AdminForm action={saveSkillCategoryAction} successMessage="Added.">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Group label">
                 <TextInput name="label" placeholder="Frontend" />
               </Field>

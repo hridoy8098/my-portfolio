@@ -182,7 +182,7 @@ export default async function PortfolioPage() {
                   </div>
 
                   {/* Footer */}
-                  <div className="flex items-center justify-between border-t border-[var(--admin-border)] bg-[var(--admin-surface-2)] px-4 py-2">
+                  <div className="flex flex-wrap items-center justify-between gap-y-2 border-t border-[var(--admin-border)] bg-[var(--admin-surface-2)] px-4 py-2">
                     <span className="text-[11px] font-mono text-[var(--admin-text-soft)]">
                       #{p.id}
                     </span>
@@ -254,7 +254,7 @@ export default async function PortfolioPage() {
                   </div>
                   <AdminForm action={savePortfolioCategoryAction} successMessage="Saved.">
                     <input type="hidden" name="_id" defaultValue={cat.id} />
-                    <div className="grid grid-cols-2 gap-2.5">
+                    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                       <Field label="Filter key">
                         <TextInput name="value" defaultValue={cat.value} />
                       </Field>
@@ -285,7 +285,7 @@ export default async function PortfolioPage() {
                 Add new category
               </p>
               <AdminForm action={savePortfolioCategoryAction} successMessage="Added.">
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                   <Field label="Filter key">
                     <TextInput name="value" placeholder="web" />
                   </Field>

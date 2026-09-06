@@ -32,7 +32,7 @@ function EducationSection({ items }: { items: Education[] }) {
             </div>
             <AdminForm action={saveEducationAction} successMessage="Saved.">
               <input type="hidden" name="_id" defaultValue={e.id} />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Degree">
                   <TextInput name="degree" defaultValue={e.degree} />
                 </Field>
@@ -60,7 +60,7 @@ function EducationSection({ items }: { items: Education[] }) {
             Add education
           </p>
           <AdminForm action={saveEducationAction} successMessage="Added.">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Degree">
                 <TextInput name="degree" placeholder="BSc in CSE" />
               </Field>
@@ -106,7 +106,7 @@ function ExperienceSection({ items }: { items: Experience[] }) {
             </div>
             <AdminForm action={saveExperienceAction} successMessage="Saved.">
               <input type="hidden" name="_id" defaultValue={x.id} />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Role">
                   <TextInput name="role" defaultValue={x.role} />
                 </Field>
@@ -148,7 +148,7 @@ function ExperienceSection({ items }: { items: Experience[] }) {
             Add experience
           </p>
           <AdminForm action={saveExperienceAction} successMessage="Added.">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Role">
                 <TextInput name="role" placeholder="Software Engineer" />
               </Field>

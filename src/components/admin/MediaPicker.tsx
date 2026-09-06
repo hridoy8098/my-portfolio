@@ -163,7 +163,7 @@ export function MediaPicker({
               <label className="block text-[13px] font-medium text-gray-700">
                 Upload new image
               </label>
-              <div className="mt-1.5 flex items-center gap-3">
+              <div className="mt-1.5 flex flex-wrap items-center gap-3">
                 <input
                   type="file"
                   accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif"

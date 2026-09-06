@@ -30,7 +30,7 @@ export default async function ProfilePage() {
       <div className="grid gap-6 xl:grid-cols-2">
         <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 ring-1 ring-indigo-500/20"><i className="bi bi-person-badge-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Basic info</h2></div>}>
           <AdminForm action={saveProfileAction}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Name">
                 <TextInput name="name" defaultValue={profile.name} />
               </Field>
@@ -44,7 +44,7 @@ export default async function ProfilePage() {
             <Field label="Hero subtitle">
               <TextArea name="subtitle" rows={2} defaultValue={profile.subtitle} />
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Email">
                 <TextInput name="email" defaultValue={profile.email} />
               </Field>
@@ -52,7 +52,7 @@ export default async function ProfilePage() {
                 <TextInput name="phone" defaultValue={profile.phone} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="City">
                 <TextInput name="city" defaultValue={profile.city} />
               </Field>
@@ -69,7 +69,7 @@ export default async function ProfilePage() {
 
         <AdminCard title={<div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 ring-1 ring-sky-500/20"><i className="bi bi-image-fill text-[13px]" /></span><h2 className="text-[15px] font-semibold text-[var(--admin-text)]">Social &amp; links</h2></div>}>
           <AdminForm action={saveProfileAction}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="GitHub handle">
                 <TextInput name="github_handle" defaultValue={profile.github_handle} />
               </Field>
@@ -77,7 +77,7 @@ export default async function ProfilePage() {
                 <TextInput name="github_url" defaultValue={profile.github_url} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="LinkedIn handle">
                 <TextInput name="linkedin_handle" defaultValue={profile.linkedin_handle} />
               </Field>
@@ -140,7 +140,7 @@ export default async function ProfilePage() {
             {socials.map((s) => (
               <AdminForm key={s.id} action={saveSocialLinkAction} successMessage="Saved.">
                 <input type="hidden" name="_id" defaultValue={s.id} />
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <Field label="Label">
                     <TextInput name="label" defaultValue={s.label} />
                   </Field>
@@ -168,7 +168,7 @@ export default async function ProfilePage() {
                 <i className="bi bi-plus-circle" />
                 Add new social link
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Label">
                   <TextInput name="label" placeholder="GitHub" />
                 </Field>

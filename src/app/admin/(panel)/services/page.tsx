@@ -85,7 +85,7 @@ export default async function ServicesPage() {
           >
             <AdminForm action={saveServiceAction} successMessage="Saved.">
               <input type="hidden" name="_id" defaultValue={service.id} />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Title">
                   <TextInput name="title" defaultValue={service.title} />
                 </Field>
@@ -128,7 +128,7 @@ export default async function ServicesPage() {
           }
         >
           <AdminForm action={saveServiceAction} successMessage="Added.">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Title">
                 <TextInput name="title" placeholder="Web Development" />
               </Field>

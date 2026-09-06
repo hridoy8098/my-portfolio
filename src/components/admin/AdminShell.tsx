@@ -7,6 +7,13 @@ import { AccountMenu } from "@/components/admin/AccountMenu";
 import { ThemeToggle } from "@/components/admin/ThemeToggle";
 
 type NavItem = { href: string; label: string; icon: string };
+type NavGroup = { label: string; items: NavItem[] };
+
+function isActive(item: NavItem, pathname: string) {
+  return item.href === "/admin"
+    ? pathname === "/admin"
+    : pathname.startsWith(item.href);
+}
 
 function Brand({ collapsed }: { collapsed?: boolean }) {
   return (
@@ -25,54 +32,124 @@ function Brand({ collapsed }: { collapsed?: boolean }) {
   );
 }
 
+function NavLink({
+  item,
+  pathname,
+  onNavigate,
+  iconOnly,
+}: {
+  item: NavItem;
+  pathname: string;
+  onNavigate?: () => void;
+  iconOnly?: boolean;
+}) {
+  const active = isActive(item, pathname);
+  return (
+    <Link
+      href={item.href}
+      onClick={onNavigate}
+      title={iconOnly ? item.label : undefined}
+      className={`admin-nav-item ${active ? "admin-nav-item-active" : ""} ${
+        iconOnly ? "justify-center px-2" : ""
+      }`}
+    >
+      <i className={`bi ${item.icon} admin-nav-icon`} />
+      {!iconOnly && <span className="truncate">{item.label}</span>}
+    </Link>
+  );
+}
+
+function NavGroupSection({
+  group,
+  pathname,
+  onNavigate,
+}: {
+  group: NavGroup;
+  pathname: string;
+  onNavigate?: () => void;
+}) {
+  const hasActive = group.items.some((item) => isActive(item, pathname));
+  const [open, setOpen] = useState(
+    hasActive || group.items.some((item) => item.href === "/admin")
+  );
+
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400 transition hover:bg-white/5 hover:text-slate-200"
+      >
+        <span className="truncate text-left">{group.label}</span>
+        <i className={`bi bi-chevron-down shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <ul className="ml-2 space-y-0.5 border-l border-white/10 pb-1 pl-2">
+          {group.items.map((item) => (
+            <li key={item.href}>
+              <NavLink item={item} pathname={pathname} onNavigate={onNavigate} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
 function NavList({
-  nav,
+  navGroups,
   collapsed,
   onNavigate,
 }: {
-  nav: NavItem[];
+  navGroups: NavGroup[];
   collapsed?: boolean;
   onNavigate?: () => void;
 }) {
   const pathname = usePathname();
+  const grouped = Boolean(onNavigate) && !collapsed;
 
   return (
     <nav className="flex-1 overflow-y-auto px-3 py-4 admin-scroll">
-      <ul className="space-y-1">
-        {nav.map((item) => {
-          const active =
-            item.href === "/admin"
-              ? pathname === "/admin"
-              : pathname.startsWith(item.href);
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={onNavigate}
-                title={collapsed ? item.label : undefined}
-                className={`admin-nav-item ${active ? "admin-nav-item-active" : ""} ${
-                  collapsed ? "justify-center px-2" : ""
-                }`}
-              >
-                <i className={`bi ${item.icon} admin-nav-icon`} />
-                {!collapsed && <span className="truncate">{item.label}</span>}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      {grouped ? (
+        <ul className="space-y-1">
+          {navGroups.map((group) => (
+            <NavGroupSection
+              key={group.label}
+              group={group}
+              pathname={pathname}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </ul>
+      ) : (
+        <ul className="space-y-1">
+          {navGroups.flatMap((group) =>
+            group.items.map((item) => (
+              <li key={item.href}>
+                <NavLink
+                  item={item}
+                  pathname={pathname}
+                  onNavigate={onNavigate}
+                  iconOnly={collapsed}
+                />
+              </li>
+            ))
+          )}
+        </ul>
+      )}
     </nav>
   );
 }
 
 function SidebarColumn({
-  nav,
+  navGroups,
   name,
   email,
   collapsed,
   onNavigate,
 }: {
-  nav: NavItem[];
+  navGroups: NavGroup[];
   name: string;
   email: string;
   collapsed?: boolean;
@@ -93,7 +170,7 @@ function SidebarColumn({
           </button>
         )}
       </div>
-      <NavList nav={nav} collapsed={collapsed} onNavigate={onNavigate} />
+      <NavList navGroups={navGroups} collapsed={collapsed} onNavigate={onNavigate} />
       <div className="border-t border-white/5 p-2">
         {collapsed ? (
           <div className="flex justify-center py-2">
@@ -176,19 +253,19 @@ function NotificationsBell() {
 }
 
 export function AdminShell({
-  nav,
+  navGroups,
   name,
   email,
   children,
 }: {
-  nav: NavItem[];
+  navGroups: NavGroup[];
   name: string;
   email: string;
   children: React.ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const pathname = usePathname();
+  const flatNav = navGroups.flatMap((group) => group.items);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -219,7 +296,7 @@ export function AdminShell({
         style={{ width: sidebarWidth }}
       >
         <SidebarColumn
-          nav={nav}
+          navGroups={navGroups}
           name={name}
           email={email}
           collapsed={collapsed}
@@ -245,7 +322,7 @@ export function AdminShell({
           />
           <aside className="absolute inset-y-0 left-0 flex w-[280px] max-w-[85vw] flex-col border-r border-white/5 shadow-2xl">
             <SidebarColumn
-              nav={nav}
+              navGroups={navGroups}
               name={name}
               email={email}
               onNavigate={() => setMobileOpen(false)}
@@ -271,7 +348,7 @@ export function AdminShell({
               >
                 <i className="bi bi-list text-lg" />
               </button>
-              <Breadcrumbs nav={nav} />
+              <Breadcrumbs nav={flatNav} />
             </div>
 
             <div className="flex items-center gap-2">

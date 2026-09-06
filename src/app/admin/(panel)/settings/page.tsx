@@ -99,7 +99,7 @@ export default async function SettingsPage() {
             <Field label="Canonical URL">
               <TextInput name="canonical_url" defaultValue={s.meta.canonical_url} placeholder="https://…" />
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Language">
                 <TextInput name="lang" defaultValue={s.meta.lang} />
               </Field>
@@ -118,7 +118,7 @@ export default async function SettingsPage() {
           title={<CardHeader icon="hero" title="Hero" description="Hero section button labels and links." />}
         >
           <AdminForm action={saveHeroSettings}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Hello prefix">
                 <TextInput name="hello_prefix" defaultValue={s.hero.hello_prefix} />
               </Field>
@@ -132,7 +132,7 @@ export default async function SettingsPage() {
             <Field label="Primary button link">
               <TextInput name="primary_link" defaultValue={s.hero.primary_link} placeholder="https://… or #about" />
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="CV button label">
                 <TextInput name="cv_label" defaultValue={s.hero.cv_label} />
               </Field>
@@ -140,7 +140,7 @@ export default async function SettingsPage() {
                 <TextInput name="cv_soon_label" defaultValue={s.hero.cv_soon_label} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Contact button label">
                 <TextInput name="contact_label" defaultValue={s.hero.contact_label} />
               </Field>
@@ -223,7 +223,7 @@ export default async function SettingsPage() {
           }
         >
           <AdminForm action={saveServiceDetailsSettings}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Page title">
                 <TextInput name="page_title" defaultValue={s.service_details.page_title} />
               </Field>
@@ -270,7 +270,7 @@ export default async function SettingsPage() {
           }
         >
           <AdminForm action={saveContactSettings}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Name label">
                 <TextInput name="name_label" defaultValue={s.contact.name_label} />
               </Field>
@@ -278,7 +278,7 @@ export default async function SettingsPage() {
                 <TextInput name="name_placeholder" defaultValue={s.contact.name_placeholder} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Email label">
                 <TextInput name="email_label" defaultValue={s.contact.email_label} />
               </Field>
@@ -286,7 +286,7 @@ export default async function SettingsPage() {
                 <TextInput name="email_placeholder" defaultValue={s.contact.email_placeholder} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Subject label">
                 <TextInput name="subject_label" defaultValue={s.contact.subject_label} />
               </Field>
@@ -294,7 +294,7 @@ export default async function SettingsPage() {
                 <TextInput name="subject_placeholder" defaultValue={s.contact.subject_placeholder} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Message label">
                 <TextInput name="message_label" defaultValue={s.contact.message_label} />
               </Field>
@@ -302,7 +302,7 @@ export default async function SettingsPage() {
                 <TextInput name="message_placeholder" defaultValue={s.contact.message_placeholder} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Submit label">
                 <TextInput name="submit_label" defaultValue={s.contact.submit_label} />
               </Field>
