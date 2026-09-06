@@ -14,7 +14,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark disabled:opacity-60"
+      className="admin-btn-primary"
     >
       {pending && (
         <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/40 border-t-white" />
