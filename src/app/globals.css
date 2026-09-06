@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --default-font: var(--font-roboto), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --heading-font: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+  --nav-font: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--default-font);
+  --font-heading: var(--heading-font);
+  --font-nav: var(--nav-font);
+}
+
+@theme {
+  --breakpoint-desk: 75rem;
+  --color-accent: #149ddd;
+  --color-accent-dark: #0f7fae;
+  --color-accent-soft: #d7eefb;
+  --color-navy: #040b14;
+  --color-navy-light: #151f2b;
+  --color-body: #272829;
+  --color-heading: #050d18;
+  --color-light: #f4fafd;
+  --color-navm: #a8a9b4;
+  --color-danger: #df1529;
+  --color-success: #059652;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #ffffff;
+    color: var(--color-body);
+    font-family: var(--default-font);
+  }
+
+  a {
+    color: var(--color-accent);
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: color-mix(in srgb, var(--color-accent), transparent 25%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-heading);
+    font-family: var(--heading-font);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8a8a8a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Typed.js cursor */
+.typed-cursor--blink,
+.typed-cursor {
+  color: var(--color-accent);
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Section reveal (AOS replacement) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Swiper (portfolio details) theming */
+.swiper-pagination-bullet {
+  background: var(--color-heading);
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--color-accent);
+  opacity: 1;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: color-mix(in srgb, var(--color-navy), transparent 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#preloader .spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: preloader-spin 0.8s linear infinite;
+}
+
+@keyframes preloader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
